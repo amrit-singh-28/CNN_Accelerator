@@ -74,7 +74,7 @@ module tb_synch_fifo;
 
         wr_en = 1; rd_en = 1; data_in = 8'd55;
         @(negedge clk);
-        check(dut.cnt == DEPTH, "cnt must stay at depth: write blocked, only read happens");
+        check(dut.cnt == DEPTH - 1, "cnt must drop to depth-1: write blocked (full), read succeeds");
         check(data_out == 8'd1, "the read during full+simultaneous-write should return oldest value (1)");
         wr_en = 0; rd_en = 0;
 
